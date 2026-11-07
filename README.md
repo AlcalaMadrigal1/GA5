@@ -61,17 +61,19 @@ No errors preventing successful completion were observed. Some jobs initially re
 Code to check the size of the index dir:
 
 ```bash
-# Your command:
+du -sh results/salmon_index/
 ```
 
 The output of the command was:
 
 ```
+1.1G    results/salmon_index/
 ```
 
-*Answer*: How long it took to create the index, and how you found out:
+*Answer*: How long it took to create the index, and how you found out:The Salmon index took approximately 22 seconds to create. I determined this by checking the start and end timestamps in the Slurm output log (`slurm-salmon_index-57112779.out`). The job started at 2:11:03 PM and finished at 2:11:25 PM on November 7, 2026.
 
-*Answer*: The size of the index dir:
+
+*Answer*: The size of the index dir: The Salmon index directory occupies 1.1 GB, as determined using the command `du -sh results/salmon_index/`.
 
 ### 8: Run Salmon for all samples
 

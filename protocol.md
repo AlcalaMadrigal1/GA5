@@ -86,7 +86,29 @@ ls results/trimgalore/logs/slurm-trimgalore-*.out | wc -l
 
 ## Step 2: Creating a transcriptome index with Salmon
 
-<???>
+
+```bash
+# Step 2: Build Salmon transcriptome index
+
+sbatch scripts/salmon_index.sh \
+    data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz \
+    results/salmon_index
+
+# Check job status
+squeue -j 57112779
+
+# Inspect the Slurm log
+cat slurm-salmon_index-57112779.out
+
+# Inspect the generated index files
+ls -lh results/salmon_index/
+
+# Move the Slurm log to the logs directory
+mv slurm-salmon_index-57112779.out results/salmon_index/logs/
+
+# Verify the archived log
+ls -lh results/salmon_index/logs/
+```
 
 ## Step 3: Pseudo-alignment and quantification with Salmon
 
