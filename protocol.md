@@ -28,8 +28,8 @@
 ## Set up: Download the reference transcriptome FASTA file from NCBI
 
 ```bash
-# Downloaded on <???>
-<???>
+# Downloaded on <11/07/2026>
+<wget -P data/ref/ https://ftp.ncbi.nlm.nih.gov/genomes/refseq/invertebrate/Culex_pipiens/latest_assembly_versions/GCF_016801865.2_TS_CPP_V2/GCF_016801865.2_TS_CPP_V2_rna.fna.gz>
 ```
 
 ## Set up: Set file paths
