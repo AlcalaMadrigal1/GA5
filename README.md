@@ -46,10 +46,11 @@ The output of the command was:
 
 ### 6: Run TrimGalore
 
-<!-- Put the code to run TrimGalore in `protocol.md`, not here. -->
+*Answer*: All 22 Trim Galore batch jobs completed successfully. I verified this by checking the Slurm job queue using `squeue -u $USER` and examining the output logs. All 22 logs contained the message "Successfully finished script trimgalore.sh".
 
-*Answer*: Whether all batch jobs succeeded, and how you checked that
-(and any problems you encountered, and how you solved them):
+I also confirmed that 44 trimmed FASTQ files were generated, corresponding to two paired-end files (R1 and R2) for each of the 22 samples. Finally, I moved all 22 Slurm output logs to `results/trimgalore/logs/` and verified their number.
+
+No errors preventing successful completion were observed. Some jobs initially remained pending in the Slurm queue, but they subsequently completed without requiring intervention.
 
 ------------------------------------------------------------------------
 

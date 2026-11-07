@@ -36,8 +36,8 @@
 
 ```bash
 # Inputs:
-fastq_dir=<???>
-ref_transcripts=<???>
+fastq_dir=../garrigos/fastq
+ref_transcripts=data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz
 
 # Base output dir:
 outdir=results
@@ -45,7 +45,44 @@ outdir=results
 
 ## Step 1: Read trimming with TrimGalore
 
-<???>
+
+```bash
+# Run Trim Galore for sample S63
+sbatch scripts/trimgalore.sh ../garrigos/fastq/S63_R1.fastq.gz ../garrigos/fastq/S63_R2.fastq.gz results/trimgalore
+
+# Check the job status
+squeue -j 57111236
+
+# Inspect the Slurm log
+cat slurm-trimgalore-57111236.out
+
+# Submit Trim Galore jobs for the remaining 21 samples
+for sample in S{64..71} S{74..86}; do
+    sbatch scripts/trimgalore.sh \
+        ../garrigos/fastq/${sample}_R1.fastq.gz \
+        ../garrigos/fastq/${sample}_R2.fastq.gz \
+        results/trimgalore
+done
+
+# Check the status of submitted jobs
+squeue -u $USER
+
+# Count successfully completed jobs
+grep -l "Successfully finished script trimgalore.sh" slurm-trimgalore-*.out | wc -l
+# Result: 22
+
+# Count trimmed FASTQ files
+find results/trimgalore/ -maxdepth 1 -name '*.fastq.gz' | wc -l
+# Result: 44
+
+# Move Slurm logs to the logs directory
+mv slurm-trimgalore-*.out results/trimgalore/logs/
+
+# Verify the number of Slurm log files
+ls results/trimgalore/logs/slurm-trimgalore-*.out | wc -l
+# Result: 22
+```
+
 
 ## Step 2: Creating a transcriptome index with Salmon
 
