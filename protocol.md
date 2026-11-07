@@ -5,7 +5,7 @@
 - Date last modified: <11/07/2026>
 - This was run at the <Pitzer> cluster of the Ohio Supercomputer Center (<https://www.osc.edu>)
 - OSC working dir: </fs/ess/PAS3493/people/alcalamadrigal1/GA5>
-- GitHub repository: <???>
+- GitHub repository: https://github.com/AlcalaMadrigal1/GA5
 
 ## Prerequisites
 
