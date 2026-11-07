@@ -82,42 +82,75 @@ The output of the command was:
 ### 9: The transcripts with the most reads
 
 *Answer*: What the `NumReads` column contains:
+The `NumReads` column contains the estimated number of sequencing fragments assigned to each transcript by Salmon. These values can be fractional because Salmon uses probabilistic methods to estimate transcript abundance, particularly when fragments are compatible with multiple transcripts.
 
 ```bash
-# Your command:
+(head -n 1 results/salmon_quant/S63/quant.sf; \
+tail -n +2 results/salmon_quant/S63/quant.sf | sort -k5,5nr | head -n 3)
 ```
 
 The output of the command was:
 
 ```
+Name            Length  EffectiveLength  TPM           NumReads
+XM_039591534.2  6566    6315.086         14518.656821  24004.889
+XM_039573735.1  6445    6194.086         5342.073324   8663.254
+XM_039573733.1  6591    6340.086         2876.480244   4774.749
 ```
 
 ### 10: The gene of the top transcript
 
 ```bash
-# Your command:
+zgrep -m 1 '^>XM_039591534.2' data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz
 ```
 
 The output of the command was:
 
-```
+```text
+>XM_039591534.2 PREDICTED: Culex pipiens pallens vitellogenin-A1-like (LOC120426760), mRNA
 ```
 
-*Answer*: The gene that the top transcript belongs to:
+*Answer*: The gene that the top transcript belongs to: The transcript XM_039591534.2 belongs to the predicted vitellogenin-A1-like gene (LOC120426760) in Culex pipiens pallens. This transcript had the highest estimated number of sequencing fragments (NumReads = 24004.889) in sample S63.
 
 ### 11: Mapping rates
 
 ```bash
-# Your command:
+for file in results/salmon_quant/S*/aux_info/meta_info.json; do
+    sample=$(basename "$(dirname "$(dirname "$file")")")
+    rate=$(grep '"percent_mapped"' "$file" | cut -d ':' -f 2 | tr -d ' ,')
+    echo "$sample $rate"
+done | sort -k2,2n
 ```
 
 The output of the command was:
 
-```
+```text
+S83 76.15040975718468
+S85 76.9540290286533
+S74 78.27531771788918
+S82 78.72909822829908
+S68 78.80701178209286
+S65 79.10547001678594
+S71 79.90465999047863
+S75 80.39148943504188
+S79 80.40608313734863
+S64 81.91516220086585
+S66 81.93504834505177
+S80 82.17212303963116
+S69 82.18239269874552
+S70 82.3059863363086
+S77 82.3281029418101
+S76 82.33958793689634
+S63 82.45598120021427
+S67 83.04590854943645
+S86 83.05318481885998
+S84 83.22071223998448
+S81 83.67951691407399
+S78 84.24900290065264
 ```
 
 *Answer*: The sample with the lowest mapping rate:
-
+Sample S83 had the lowest Salmon mapping rate at approximately 76.15%, based on the `percent_mapped` values reported in the `aux_info/meta_info.json` files for all 22 samples.
 ------------------------------------------------------------------------
 
 ## Part D: Summarizing all steps with MultiQC

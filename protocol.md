@@ -112,7 +112,45 @@ ls -lh results/salmon_index/logs/
 
 ## Step 3: Pseudo-alignment and quantification with Salmon
 
-<???>
+#Quantify transcript abundance for all 22 paired-end RNA-seq samples using Salmon.
+
+```bash
+# Run Salmon for the first sample (S63)
+sbatch scripts/salmon_quant.sh \
+    results/trimgalore/S63_R1.fastq.gz \
+    results/trimgalore/S63_R2.fastq.gz \
+    results/salmon_index \
+    results/salmon_quant
+
+# Run Salmon for the remaining 21 samples
+for sample in S{64..71} S{74..86}; do
+    sbatch scripts/salmon_quant.sh \
+        results/trimgalore/${sample}_R1.fastq.gz \
+        results/trimgalore/${sample}_R2.fastq.gz \
+        results/salmon_index \
+        results/salmon_quant
+done
+
+# Check job status
+squeue -u $USER
+
+# Count successfully completed jobs
+grep -l "Successfully finished script salmon_quant.sh" \
+    slurm-salmon_quant-*.out | wc -l
+
+# Count the generated quantification files
+find results/salmon_quant/ -name 'quant.sf' | wc -l
+
+# Archive Slurm output logs
+mv slurm-salmon_quant-*.out results/salmon_quant/logs/
+
+# Verify the number of archived logs
+find results/salmon_quant/logs/ \
+    -name 'slurm-salmon_quant-*.out' | wc -l
+```
+
+All 22 Salmon quantification jobs completed successfully. A total of 22 `quant.sf` files were generated, and all 22 Slurm logs were archived.
+
 
 ## Step 4: Summarizing the results of all steps with MultiQC
 
