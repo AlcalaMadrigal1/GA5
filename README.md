@@ -1,4 +1,5 @@
 
+[![DOI](https://sandbox.zenodo.org/badge/DOI/10.5072/zenodo.636747.svg)](https://sandbox.zenodo.org/doi/10.5072/zenodo.636747)
 
 # GA5 answers - <Antonio Alcala Madrigal>
 
@@ -225,4 +226,4 @@ These changes improve reproducibility by allowing future users to retrieve the s
 
 ### 20: Get a (test) DOI with Zenodo
 
-*Answer*: Your Zenodo Sandbox DOI:
+*Answer*: Your Zenodo Sandbox DOI:10.5072/zenodo.636747
