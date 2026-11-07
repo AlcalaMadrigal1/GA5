@@ -162,21 +162,31 @@ Sample S83 had the lowest Salmon mapping rate at approximately 76.15%, based on 
 ### 13: Run MultiQC
 
 *Answer*: For each program, the number of reports that MultiQC found,
-and why it found this number:
+and why it found this number:MultiQC detected 22 Salmon metadata reports, 22 fragment length distribution reports, and 22 library format counts reports. This is because Salmon quantified 22 paired-end RNA-seq samples, generating one set of quantification results per sample.
+
+MultiQC also detected 44 Trim Galore reports and 44 FastQC reports. These correspond to the two FASTQ files (R1 and R2) associated with each of the 22 samples, resulting in 44 reports for each program.
+
+The MultiQC analysis completed successfully and generated the report results/multiqc/multiqc_report.html.
 
 ### 14: The General Statistics table
 
 *Answer*: The sample with the lowest Salmon mapping rate,
-and whether this matches your answer to question 11:
+and whether this matches your answer to question 11:  According to the MultiQC General Statistics table, sample S83 had the lowest Salmon mapping rate at 76.15%. This agrees with the result obtained directly from Salmon in Question 11, confirming that MultiQC accurately summarized the mapping statistics.
 
 ### 15: Adapter lengths
 
 *Answer*: The most common adapter lengths, whether this surprised you,
-and why you think these lengths are the most common:
+and why you think these lengths are the most common: The most commonly detected adapter lengths were 1, 2, and 3 nucleotides, with 1 nucleotide being the most frequent. This was surprising because adapter contamination is generally associated with longer sequences rather than extremely short fragments. One possible explanation is that Trim Galore detected short partial matches to adapter sequences at the ends of reads. Therefore, these short matches do not necessarily indicate the presence of complete adapter sequences.
 
 ### 16: Ask Claude about the MultiQC report
 
-*Answer*: What you asked, and what you learned from Claude's answer (in your own words):
+*Answer*: What you asked, and what you learned from Claude's answer (in your own words):**Answer:**
+
+I asked Claude to help me understand the adapter-length distribution in the MultiQC report, particularly why 1–3 nucleotide adapter matches were much more frequent than longer matches.
+
+Claude explained that very short matches can occur by chance at the ends of sequencing reads and do not necessarily indicate substantial adapter contamination. It suggested that longer adapter matches, especially those occurring more frequently than expected by chance, would provide stronger evidence of actual adapter contamination.
+
+I learned that the most frequent adapter lengths do not necessarily represent complete adapter sequences. Therefore, the adapter-length distribution should be interpreted alongside other quality-control metrics before drawing conclusions about sequencing quality.
 
 ------------------------------------------------------------------------
 

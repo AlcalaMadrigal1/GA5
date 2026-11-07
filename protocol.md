@@ -153,5 +153,30 @@ All 22 Salmon quantification jobs completed successfully. A total of 22 `quant.s
 
 
 ## Step 4: Summarizing the results of all steps with MultiQC
+Summarize the results from FastQC, Trim Galore, and Salmon using MultiQC.
 
-<???>
+```bash
+# Run MultiQC on all results
+sbatch scripts/multiqc.sh results results/multiqc
+
+# Check the Slurm job status
+squeue -j 57113775
+
+# Inspect the MultiQC output
+cat slurm-multiqc-57113775.out
+
+# Archive the Slurm log
+mv slurm-multiqc-57113775.out results/multiqc/logs/
+```
+
+MultiQC v1.35 successfully generated the report at
+`results/multiqc/multiqc_report.html`.
+
+The analysis detected:
+- 44 FastQC reports
+- 44 Trim Galore reports
+- 22 Salmon metadata reports
+- 22 Salmon fragment length distribution reports
+- 22 Salmon library format counts reports
+
+The 44 FastQC and Trim Galore reports correspond to two paired-end read files (R1 and R2) for each of the 22 samples. Salmon generated one set of quantification reports per sample.
