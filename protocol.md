@@ -25,12 +25,33 @@
   After the jobs of a step have finished, check these logs for errors,
   then move them into a `logs/` dir within that step's output dir.
 
+
 ## Set up: Download the reference transcriptome FASTA file from NCBI
 
+The reference transcriptome is from NCBI RefSeq, assembly GCF_016801865.2_TS_CPP_V2 (*Culex pipiens*). The file was downloaded on November 7, 2026.
+
 ```bash
-# Downloaded on <11/07/2026>
-<wget -P data/ref/ https://ftp.ncbi.nlm.nih.gov/genomes/refseq/invertebrate/Culex_pipiens/latest_assembly_versions/GCF_016801865.2_TS_CPP_V2/GCF_016801865.2_TS_CPP_V2_rna.fna.gz>
+mkdir -p data/ref/
+
+wget -P data/ref/ https://ftp.ncbi.nlm.nih.gov/genomes/refseq/invertebrate/Culex_pipiens/latest_assembly_versions/GCF_016801865.2_TS_CPP_V2/GCF_016801865.2_TS_CPP_V2_rna.fna.gz
 ```
+
+### Reference file integrity verification
+
+The SHA-256 checksum of the reference transcriptome used in this analysis is:
+
+```text
+c5e96fc85a19b572acd40af808cd239f7eef19d5578721e3b8811a3623284b24
+```
+
+To verify the integrity of the downloaded reference file, run:
+
+```bash
+echo "c5e96fc85a19b572acd40af808cd239f7eef19d5578721e3b8811a3623284b24  data/ref/GCF_016801865.2_TS_CPP_V2_rna.fna.gz" | sha256sum -c -
+```
+
+The expected result is `OK`, confirming that the reference file is identical to the one used in this analysis.
+
 
 ## Set up: Set file paths
 

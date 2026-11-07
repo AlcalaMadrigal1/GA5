@@ -195,11 +195,25 @@ I learned that the most frequent adapter lengths do not necessarily represent co
 ### 17: Claude's review of your protocol and scripts
 
 *Answer*: At least three of Claude's suggestions,
-and whether you agree or disagree with each one, and why:
+and whether you agree or disagree with each one, and why:I asked Claude Code to review my protocol.md and four shell scripts (trimgalore.sh, salmon_index.sh, salmon_quant.sh, and multiqc.sh) to identify issues affecting reproducibility. Claude provided five recommendations, of which I selected three to discuss.
+
+1. Make the reference transcriptome download reproducible. I agree with this recommendation because the protocol should contain an executable download command specifying the exact NCBI reference version. Recording a checksum would also help verify that future analyses use the same reference file.
+
+2. Document the choice of a non-decoy-aware Salmon index. I agree that methodological decisions should be explained. Although a simpler transcriptome-only index was used for this assignment, it has limitations compared with a decoy-aware index. Documenting this choice would help other researchers understand and evaluate the workflow.
+
+3. Clarify sample selection and Slurm job IDs. I agree that the protocol should explain why S72 and S73 are absent from the sample loops, after verifying the available input files. I also agree that Slurm job IDs should be identified as specific to the original execution rather than reusable identifiers.
+
+Overall, Claude's review helped me recognize that reproducibility requires not only working scripts but also clear documentation of input data, methodological choices, and execution details.
 
 ### 18: Address a suggestion
 
-*Answer*: Which suggestion(s) you addressed, and what you changed:
+*Answer*: Which suggestion(s) you addressed, and what you changed:I addressed Claude's recommendation to improve the reproducibility of the reference transcriptome download.
+
+I updated protocol.md by replacing the placeholder download command with an executable wget command, documenting the exact NCBI RefSeq assembly version (GCF_016801865.2_TS_CPP_V2), and adding a SHA-256 checksum for the reference FASTA file.
+
+I also included a command to verify the downloaded file against the recorded checksum. I tested this verification on OSC, and it returned OK, confirming that the reference file matches the documented checksum.
+
+These changes improve reproducibility by allowing future users to retrieve the specified reference and verify its integrity without repeating the downstream analyses.
 
 ------------------------------------------------------------------------
 
